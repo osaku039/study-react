@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Headline(props) {
+export function Headline(props) {
   return (
     <dev>
         <Image

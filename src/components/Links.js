@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Links() {
+export function Links() {
   return (
           <div className={styles.ctas}>
             <a

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Footer() {
+export function Footer() {
   return (
         <footer className={styles.footer}>
           <a
