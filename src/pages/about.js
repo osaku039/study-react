@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 import { Footer } from "../components/Footer";
 import { Links } from "../components/Links";
 import { Headline } from "@/components/Headline";
+import { Header } from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <div
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
