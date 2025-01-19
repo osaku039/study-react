@@ -20,7 +20,6 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  console.log("key="+process.env.NEXT_PUBLIC_API_KEY)
   const foo = 1;
 
   const handleClick = useCallback((e) => {

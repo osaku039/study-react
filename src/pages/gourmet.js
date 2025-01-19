@@ -1,30 +1,37 @@
-"use client"
+// クライアント側のコンポーネント
+import { useEffect, useState } from "react";
 
-import Head from "next/head";
-import { Geist, Geist_Mono } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { Footer } from "../components/Footer";
-import { Links } from "../components/Links";
-import { Headline } from "@/components/Headline";
-import { Header } from "@/components/Header";
-import { fetchGourmet } from "./data";
+export default function Page() {
+  const [responseData, setResponseData] = useState(null);
+  const [isError, setIsError] = useState(false);
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("/api/gourmetapi");
+        const data = await response.json();
+        setResponseData(data);
+      } catch (error) {
+        console.error("データ取得エラー:", error);
+        setIsError(true);
+      }
+    }
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+    fetchData();
+  }, []);
 
-export default function Home() {
+  if (isError) {
+    return <p>データ取得エラー</p>;
+  }
+
+  if (!responseData) {
+    return <p>データ取得中です...</p>;
+  }
+
   return (
-    <>
-        <form action={fetchGourmet}>
-        <button type="submit">データを取得する</button>
-        </form>
-    </>
+    <div>
+      <h1>APIの返却データ</h1>
+      <pre>{JSON.stringify(responseData, null, 2)}</pre>
+    </div>
   );
 }
