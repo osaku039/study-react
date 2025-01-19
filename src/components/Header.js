@@ -24,6 +24,9 @@ export function Header() {
             <Link href="/gourmet" className={styles.anchor}>
                 Api
             </Link>
+            <Link href="/locate" className={styles.anchor}>
+                Locate
+            </Link>
         </header>
   );
 }
