@@ -21,6 +21,9 @@ export function Header() {
             <Link href="/about" className={styles.anchor}>
                 About
             </Link>
+            <Link href="/gourmet" className={styles.anchor}>
+                Api
+            </Link>
         </header>
   );
 }

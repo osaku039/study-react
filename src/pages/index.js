@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { Links } from "../components/Links";
 import { Headline } from "../components/Headline";
 import { Header } from "../components/Header";
+import { useCallback } from "react";
 
 
 const geistSans = Geist({
@@ -19,6 +20,15 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  console.log("key="+process.env.NEXT_PUBLIC_API_KEY)
+  const foo = 1;
+
+  const handleClick = useCallback((e) => {
+    console.log(e.target.href);
+    e.preventDefault();
+    alert(foo);
+  }, []);
+
   return (
     <>
       <Head>
@@ -28,6 +38,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <a href="/about" onClick={handleClick}>
+       about
+      </a>
       <div
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
