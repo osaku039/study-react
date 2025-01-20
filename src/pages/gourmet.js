@@ -8,7 +8,7 @@ export default function Page() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("/api/gourmetapi");
+        const response = await fetch("/api/gourmetapi?lat=35.66&lng=139.76145&range=3");
         const data = await response.json();
         setResponseData(data);
       } catch (error) {
