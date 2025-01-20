@@ -92,14 +92,134 @@ a.secondary {
   min-width: 180px;
 }
 
+.button {
+  background-color: #a48b7e;
+  border-radius:25px;
+  margin: 30px;
+  width: 300px;
+  height: 70px;
+  border: none;
+  box-shadow: none;
+  font-size: 30px;
+  color: white;
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: 200px 1fr;  /* 画像の幅を200pxに設定し、残りのスペースをテキストに */
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  grid-template-areas:
+    "image title"
+    "image type"
+    "image food"
+    "image age";
+  margin: 50px;
+}
+
+.shopTitle {
+  grid-area: title;
+  margin: 0.3rem 0;
+  font-size: 1.4rem;
+}
+
+.shopImage {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+}
+
+.shopType {
+  grid-area: type;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.shopFood {
+  grid-area: food;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.shopAge {
+  grid-area: age;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
 .header {
 	width: 100%;
 	height: 100px;
 	border-bottom: 1px solid #eaeaea;
+  background-color: #987a6a;
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	align-items: center;
+  padding: 60px 10px;
 }
+
+.header1 {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 50px 0px;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0 2em;
+}
+
+.logoImg {
+  width: 300px;
+}
+
+.inlineRadio {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #b6b6b6;
+}
+
+.inlineRadio div {
+  position: relative;
+  flex: 1;
+}
+
+.inlineRadio input {
+  width: 100%;
+  height: 60px;
+  opacity: 0;
+}
+
+.inlineRadio label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #b6b6b6;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-right: 1px solid #b6b6b6;
+}
+
+.inlineRadio div:last-child label {
+  border-right: 0;
+}
+
+.inlineRadio input:checked + label {
+  background: #d81b60;
+  font-weight: 500;
+  color: #fff;
+}
+
 
 .anchor {
 	display: inline-block;

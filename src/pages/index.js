@@ -32,8 +32,8 @@ export default function Home() {
     }
   }, [isAvailable]);
 
+  //現在地取得
   const getCurrentPosition = (range) => {
-    
   let rangeRatio = document.getElementsByName('range');
   let len = rangeRatio.length;
     navigator.geolocation.getCurrentPosition(pos => {
@@ -50,6 +50,7 @@ export default function Home() {
     });
   };
 
+  //グルメAPIからの取得
   async function fetchData(lat, lng, range) {
     try {
       const response = await fetch(`/api/gourmetapi?lat=${lat}&lng=${lng}&range=${range}`);
@@ -62,47 +63,58 @@ export default function Home() {
     }
   }
 
+  //モーダル表示するためのもの
   const handleCardClick = (shop) => {
     setIsOpenModal(true);
     setCurrentShop(shop);
-    // alert(`ショップ名: ${shop.name}\n住所: ${shop.address}`);
   };
 
+  //お店のカードをつくる
   const createCard = (data) => {
     if (!data || !data.results || !data.results.shop) return;
-
+  
     const shopArray = data.results.shop;
     const cardContainer = document.getElementById("card-container");
-
+  
     cardContainer.innerHTML = ''; // 既存のカードをクリア
-
+  
     shopArray.forEach((shop) => {
       const myCard = document.createElement("div");
+      myCard.classList.add(styles.shop); // CSSモジュールでスタイル適用
+  
       const myCardTitle = document.createElement("h3");
-      const myCardType = document.createElement("p");
-      const myCardFood = document.createElement("p");
-      const myCardAge = document.createElement("p");
-      const myCardImage = document.createElement("img");
-
-      myCard.classList.add("card-item");
+      myCardTitle.classList.add(styles.shopTitle); // タイトル用クラス
       myCardTitle.textContent = shop.name; // 店名
-      myCardType.textContent = `住所: ${shop.address}`; // 住所
-      myCardFood.textContent = `アクセス: ${shop.access}`; // アクセス情報
-      myCardAge.textContent = `営業時間: ${shop.open}`; // 営業時間
+  
+      const myCardImage = document.createElement("img");
+      myCardImage.classList.add(styles.shopImage); // 画像用クラス
       myCardImage.src = shop.logo_image; // 画像のURLを設定
-
+  
+      const myCardType = document.createElement("p");
+      myCardType.classList.add(styles.shopType); // 住所用クラス
+      myCardType.textContent = `住所: ${shop.address}`; // 住所
+  
+      const myCardFood = document.createElement("p");
+      myCardFood.classList.add(styles.shopFood); // アクセス情報用クラス
+      myCardFood.textContent = `アクセス: ${shop.access}`; // アクセス情報
+  
+      const myCardAge = document.createElement("p");
+      myCardAge.classList.add(styles.shopAge); // 営業時間用クラス
+      myCardAge.textContent = `営業時間: ${shop.open}`; // 営業時間
+  
+      // カードに要素を追加
       myCard.appendChild(myCardTitle);
       myCard.appendChild(myCardImage);
       myCard.appendChild(myCardType);
       myCard.appendChild(myCardFood);
       myCard.appendChild(myCardAge);
-
-      // クリックイベントを追加
-      myCard.addEventListener('click', () => handleCardClick(shop));
-
-      cardContainer.appendChild(myCard);
+  
+      myCard.addEventListener('click', () => handleCardClick(shop)); // モーダルの表示関数へ
+  
+      cardContainer.appendChild(myCard); // カードをコンテナに追加
     });
   };
+  
 
   useEffect(() => {
     if (responseData) {
@@ -118,11 +130,17 @@ export default function Home() {
 
   return (
     <div className={styles.locate}>
-      <h1>ご飯検索システム</h1>
+      <Head>
+        <title>ごはん屋さーち</title>
+        <link rel="icon" href="/logo.ico" />
+      </Head>
+      <Header className={styles.header1}>
+        <div className={styles.headerInner}>
+        </div>
+      </Header>
       {!isAvailable && <ErrorText />}
       {isAvailable && (
         <div>
-          <button onClick={getCurrentPosition}>お店を検索</button>
           <div>
             <label><input type="radio" name="range" value="1" />300m</label>
             <label><input type="radio" name="range" value="2" />500m</label>
@@ -130,11 +148,7 @@ export default function Home() {
             <label><input type="radio" name="range" value="4" />2000m</label>
             <label><input type="radio" name="range" value="5" />3000m</label>
           </div>
-          <div>
-            latitude: {position.latitude}
-            <br />
-            longitude: {position.longitude}
-          </div>
+          <button onClick={getCurrentPosition} className={styles.button}>ごはんを検索</button>
           <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} shop={currentShop} />
           <div id="card-container"></div>
         </div>

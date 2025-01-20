@@ -15,18 +15,7 @@ const geistMono = Geist_Mono({
 export function Header() {
   return (
         <header className={styles.header}>
-            <Link href="/" className={styles.anchor}>
-                Index
-            </Link>
-            <Link href="/about" className={styles.anchor}>
-                About
-            </Link>
-            <Link href="/gourmet" className={styles.anchor}>
-                Api
-            </Link>
-            <Link href="/locate" className={styles.anchor}>
-                Locate
-            </Link>
+              <img className={styles.logoImg} src="titleImage.jpg" />
         </header>
   );
 }
